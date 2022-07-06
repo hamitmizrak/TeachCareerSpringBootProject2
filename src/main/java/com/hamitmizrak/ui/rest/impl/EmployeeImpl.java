@@ -27,32 +27,36 @@ public class EmployeeImpl implements IEmployeeRest {
         return "index";
     }
 
-    @Override
+    //SAVE
     //http://localhost:8080/api/v1/employees
+    @Override
     @PostMapping("/employees")
     public EmployeeDto createEmployee( @RequestBody EmployeeDto employeeDto) {
         services.createEmployee(employeeDto);
         return employeeDto;
     }
 
-    @Override
+    //LIST
     //http://localhost:8080/api/v1/employees
+    @Override
     @GetMapping("/employees")
     public List<EmployeeDto> getAllEmployees() {
         List<EmployeeDto> list=services.getAllEmployees();
         return list;
     }
 
-    @Override
+    //FIND
     //http://localhost:8080/api/v1/employees/1
-    @PostMapping("/employees/{id}")
+    @Override
+    @GetMapping ("/employees/{id}")
     public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable(name="id") Long id) {
         ResponseEntity<EmployeeDto> dto= services.getEmployeeById(id);
         return dto;
     }
 
-    @Override
+    //DELETE
     //http://localhost:8080/api/v1/employees/1
+    @Override
     @DeleteMapping("/employees/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable(name="id") Long id) {
         services.deleteEmployeeById(id);
@@ -61,8 +65,9 @@ public class EmployeeImpl implements IEmployeeRest {
         return ResponseEntity.ok(response);
     }
 
-    @Override
+    //UPDATE
     //http://localhost:8080/api/v1/employees/1
+    @Override
     @PutMapping("/employees/{id}")
     public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable(name="id") Long id, @RequestBody EmployeeDto employeeDto) {
        services.updateEmployee(id,employeeDto);

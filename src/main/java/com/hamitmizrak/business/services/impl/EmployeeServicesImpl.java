@@ -83,8 +83,8 @@ public class EmployeeServicesImpl implements IEmployeeServices {
         EmployeeEntity entityFind= repository.findById(id).orElseThrow( ()->new ResourceNotFoundException(id+"id yoktur"));
         EmployeeEntity entity = dtoToEntity(employeeDto);
 
-        entityFind.setEmployeeName(entityFind.getEmployeeName());
-        entityFind.setEmployeeSurname(entityFind.getEmployeeSurname());
+        entityFind.setEmployeeName(entity.getEmployeeName());
+        entityFind.setEmployeeSurname(entity.getEmployeeSurname());
 
         EmployeeEntity saveEntity=  repository.save(entityFind);
 
