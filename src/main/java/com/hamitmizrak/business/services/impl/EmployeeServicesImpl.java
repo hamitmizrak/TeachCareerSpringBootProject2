@@ -81,7 +81,7 @@ public class EmployeeServicesImpl implements IEmployeeServices {
     @PutMapping({"/update/employees","/update/employees/{id}"})
     public ResponseEntity<EmployeeDto> updateEmployeeById(@PathVariable(name="id",required = false) Long id, EmployeeDto employeeDto) {
         EmployeeEntity entityFind= repository.findById(id).orElseThrow( ()->new ResourceNotFoundException(id+"id yoktur"));
-        EmployeeEntity entity=dtoToEntity(employeeDto);
+        EmployeeEntity entity = dtoToEntity(employeeDto);
 
         entityFind.setEmployeeName(entityFind.getEmployeeName());
         entityFind.setEmployeeSurname(entityFind.getEmployeeSurname());
