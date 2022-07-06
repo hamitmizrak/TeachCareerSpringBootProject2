@@ -5,6 +5,7 @@ import com.hamitmizrak.data.entity.EmployeeEntity;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IEmployeeServices {
 
@@ -22,7 +23,7 @@ public interface IEmployeeServices {
     public ResponseEntity<EmployeeDto> getEmployeeById(Long id);
 
     //delete
-    public ResponseEntity<EmployeeDto> deleteEmployeeById(Long id);
+    public ResponseEntity<Map<String,Boolean>> deleteEmployeeById(Long id);
 
     //update
     public ResponseEntity<EmployeeDto> updateEmployeeById(Long id,EmployeeDto employeeDto);

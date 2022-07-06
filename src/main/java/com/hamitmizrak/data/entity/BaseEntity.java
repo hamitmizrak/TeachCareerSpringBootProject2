@@ -43,5 +43,4 @@ abstract   public class BaseEntity {
     @Column(name="update_date")
     private Date updateDate;
 
-
 }
