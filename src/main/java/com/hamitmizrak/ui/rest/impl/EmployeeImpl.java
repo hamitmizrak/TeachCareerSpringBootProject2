@@ -2,11 +2,13 @@ package com.hamitmizrak.ui.rest.impl;
 
 import com.hamitmizrak.business.dto.EmployeeDto;
 import com.hamitmizrak.business.services.IEmployeeServices;
+import com.hamitmizrak.data.entity.EmployeeEntity;
 import com.hamitmizrak.ui.rest.IEmployeeRest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +28,7 @@ public class EmployeeImpl implements IEmployeeRest {
     public String getRoot(){
         return "index";
     }
+
 
     //SAVE
     //http://localhost:8080/api/v1/employees

@@ -15,6 +15,7 @@ import java.util.Date;
 @Builder
 
 @Entity
+@Table(name = "employee")
 public class EmployeeEntity extends BaseEntity {
     private String employeeName;
     private String employeeSurname;
