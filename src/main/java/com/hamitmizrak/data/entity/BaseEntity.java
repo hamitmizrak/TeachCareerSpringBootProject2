@@ -20,7 +20,7 @@ import java.util.Date;
 
 //super class oldugu icin
 @MappedSuperclass
-abstract   public class BaseEntity {
+abstract  public class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,5 +42,4 @@ abstract   public class BaseEntity {
     @LastModifiedDate
     @Column(name="update_date")
     private Date updateDate;
-
 }

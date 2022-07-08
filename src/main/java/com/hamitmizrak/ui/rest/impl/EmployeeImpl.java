@@ -2,13 +2,12 @@ package com.hamitmizrak.ui.rest.impl;
 
 import com.hamitmizrak.business.dto.EmployeeDto;
 import com.hamitmizrak.business.services.IEmployeeServices;
-import com.hamitmizrak.data.entity.EmployeeEntity;
+
 import com.hamitmizrak.ui.rest.IEmployeeRest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,8 +50,8 @@ public class EmployeeImpl implements IEmployeeRest {
     //FIND
     //http://localhost:8080/api/v1/employees/1
     @Override
-    @GetMapping ("/employees/{id}")
-    public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable(name="id") Long id) {
+    @GetMapping ({"/employees/{id}","/employees/"})
+    public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable(name="id",required = false) Long id) {
         ResponseEntity<EmployeeDto> dto= services.getEmployeeById(id);
         return dto;
     }
@@ -60,9 +59,9 @@ public class EmployeeImpl implements IEmployeeRest {
     //DELETE
     //http://localhost:8080/api/v1/employees/1
     @Override
-    @DeleteMapping("/employees/{id}")
-    public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable(name="id") Long id) {
-        services.deleteEmployeeById(id);
+    @DeleteMapping({"/employees/{id}","/employees/"})
+    public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable(name="id",required = false) Long id) {
+        services.deleteEmployee(id);
         Map<String,Boolean> response=new HashMap<>();
         response.put("silindi",Boolean.TRUE);
         return ResponseEntity.ok(response);

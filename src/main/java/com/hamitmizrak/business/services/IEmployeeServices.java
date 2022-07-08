@@ -23,7 +23,7 @@ public interface IEmployeeServices {
     public ResponseEntity<EmployeeDto> getEmployeeById(Long id);
 
     //delete
-    public ResponseEntity<Map<String,Boolean>> deleteEmployeeById(Long id);
+    public ResponseEntity<Map<String,Boolean>> deleteEmployee(Long id);
 
     //update
     public ResponseEntity<EmployeeDto> updateEmployee(Long id,EmployeeDto employeeDto);

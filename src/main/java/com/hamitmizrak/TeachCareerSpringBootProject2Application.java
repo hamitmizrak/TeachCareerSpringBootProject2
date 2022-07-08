@@ -18,7 +18,6 @@ public class TeachCareerSpringBootProject2Application {
 
     public static void main(String[] args) {
 
-
         //DevTools
         System.setProperty("spring.devtools.restart.enabled","false");
 
@@ -27,5 +26,4 @@ public class TeachCareerSpringBootProject2Application {
 
         SpringApplication.run(TeachCareerSpringBootProject2Application.class, args);
     }
-
 }

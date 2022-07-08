@@ -26,19 +26,26 @@ public class EmployeeServicesImpl implements IEmployeeServices {
 
     @Autowired
     ModelMapper modelMapper;
-    
+
+    // Model Mapper
+    // entityToDto
     @Override
     public EmployeeDto entityToDto(EmployeeEntity employeeEntity) {
         EmployeeDto dto=  modelMapper.map(employeeEntity,EmployeeDto.class);
         return dto;
     }
 
+    // Model Mapper
+    // dtoToEntity
     @Override
     public EmployeeEntity dtoToEntity(EmployeeDto employeeDto) {
         EmployeeEntity employeeEntity=    modelMapper.map(employeeDto,EmployeeEntity.class);
         return employeeEntity;
     }
 
+    // CRUD
+    // SAVE
+    // http://localhost:8080/save/employees
     @Override
     @PostMapping("/save/employees")
     public EmployeeDto createEmployee(EmployeeDto employeeDto) {
@@ -47,6 +54,9 @@ public class EmployeeServicesImpl implements IEmployeeServices {
         return employeeDto;
     }
 
+
+    // LIST
+    // http://localhost:8080/list/employees
     @Override
     @GetMapping("/list/employees")
     public List<EmployeeDto> getAllEmployees() {
@@ -59,6 +69,8 @@ public class EmployeeServicesImpl implements IEmployeeServices {
         return dtoList;
     }
 
+    // FINDBYID
+    // http://localhost:8080/find/employees/1
     @Override
     @GetMapping({"/find/employees","/find/employees/{id}"})
     public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable(name="id",required = false) Long id) {
@@ -67,9 +79,11 @@ public class EmployeeServicesImpl implements IEmployeeServices {
         return ResponseEntity.ok(dto);
     }
 
+    // DELETE
+    // http://localhost:8080/delete/employees/1
     @Override
     @DeleteMapping({"/delete/employees","/delete/employees/{id}"})
-    public ResponseEntity<Map<String,Boolean>> deleteEmployeeById(@PathVariable(name="id",required = false) Long id) {
+    public ResponseEntity<Map<String,Boolean>> deleteEmployee(@PathVariable(name="id",required = false) Long id) {
         EmployeeEntity entity= repository.findById(id).orElseThrow( ()->new ResourceNotFoundException(id+"id yoktur"));
         repository.delete(entity);
         Map<String,Boolean> response=new HashMap<String,Boolean>();
@@ -77,8 +91,10 @@ public class EmployeeServicesImpl implements IEmployeeServices {
         return ResponseEntity.ok(response);
     }
 
+    // PUT(GÜNCELLEMEK)
+    // http://localhost:8080/update/employees/1
     @Override
-    @PutMapping({"/update/employees","/update/employees/{id}"})
+    @PostMapping({"/update/employees","/update/employees/{id}"})
     public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable(name="id",required = false) Long id, EmployeeDto employeeDto) {
         EmployeeEntity entityFind= repository.findById(id).orElseThrow( ()->new ResourceNotFoundException(id+"id yoktur"));
         EmployeeEntity entity = dtoToEntity(employeeDto);
