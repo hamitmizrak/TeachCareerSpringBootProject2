@@ -66,9 +66,15 @@ public class EmployeeControllerImp implements IEmployeeController {
     }
 
     //FIND
+    // http://localhost:8080/find/employee/4
+    @GetMapping("find/employee/{id}")
     @Override
-    public String employeeControllerFind(Long id, Model model) {
-        return null;
+    public String employeeControllerFind(@PathVariable(name="id") Long id, Model model) {
+        RestTemplate restTemplate = new RestTemplate();
+        String URL = "http://localhost:8080/api/v1/employees/"+id;//dikkat sonuna root yazma
+        ResponseEntity<EmployeeRestDto> responseEntity = restTemplate.exchange(URL, HttpMethod.GET, HttpEntity.EMPTY,EmployeeRestDto.class);
+        model.addAttribute("employee_find",responseEntity.getBody());
+        return "employee_detail_pages";
     }
 
     //DELETE
