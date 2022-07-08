@@ -1,0 +1,108 @@
+<!doctype html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+<!-- title-->
+<title>My page</title>
+<!-- favicon -->
+<link rel="icon" href="images/favicon.jpg"/>
+
+<!-- Turkce karakter -->
+<meta charset="utf-8"/>
+
+<!-- responsive design -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- seo -->
+<meta name="keywords" content="html5,css3,js,jquery,bootstrap,react,es5,es6"/>
+<meta name="description" content="one pages, html5,css3,js,jquery,bootstrap,seo"/>
+<meta name="author" content="Hamit Mızrak"/>
+
+<!-- Google Fonts-->
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text&family=Quicksand:wght@300&display=swap"
+      rel="stylesheet">
+
+<!-- Font awesome-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+
+<!-- Bootstrap CSS v5.0.2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+
+<!-- jquery UI -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+<!-- External CSS -->
+<!--<link rel="stylesheet"   th:href="@{/css/style.css}">-->
+
+<!-- External JS -->
+<!--<script th:src="@{/js/template.js}"></script>-->
+<style>
+    tr > td {
+        color: white;
+    }
+</style>
+</head>
+
+<body class="bg-dark text-white">
+<!-- start codes -->
+
+<style>
+    .divider:after,
+    .divider:before {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #eee;
+    }
+
+    .h-custom {
+        height: calc(100% - 73px);
+    }
+
+    @media (max-width: 450px) {
+        .h-custom {
+            height: 100%;
+        }
+    }
+</style>
+<section class="vh-100">
+    <div class="container-fluid h-custom">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+                     class="img-fluid" alt="Sample image">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <form th:action="@{/employee/form}" method="post" th:object="${employee_save}">
+                  <!--  private Long employeeId;
+                    private String employeeName;
+                    private String employeeSurname;-->
+                    <!-- employeeName -->
+                    <div class="form-outline mb-4">
+                        <input type="text" class="form-control form-control-lg"  placeholder="employee Name " id="employeeName" th:field="*{employeeName}" />
+                        <label th:if="${#fields.hasErrors('employeeName')}" th:errors="*{employeeName}"  class="form-label text-danger" >employeeName</label>
+                    </div>
+
+                    <!-- employeeSurname-->
+                    <div class="form-outline mb-4">
+                        <input type="text" class="form-control form-control-lg"  placeholder="employeeSurname" id="employeeSurname" th:field="*{employeeSurname}" />
+                        <label th:if="${#fields.hasErrors('employeeSurname')}" th:errors="*{employeeSurname}"  class="form-label text-danger">employee Surname </label>
+                    </div>
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                        <input type="submit" class="btn btn-primary btn-lg"
+                                style="padding-left: 2.5rem; padding-right: 2.5rem;" value="Gönder">
+                        <a href="/employee/list" class="btn btn-warning btn-lg">LIST</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bootstrap JavaScript Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -10,11 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -38,17 +37,26 @@ public class EmployeeControllerImp implements IEmployeeController {
     }
 
     //SAVE GET
+    // http://localhost:8080/employee/form
     @GetMapping("employee/form")
     @Override
     public String employeeControllerSaveGetForm(Model model) {
         model.addAttribute("employee_save", new EmployeeRestDto());
-        return "employee_list";
+        return "employee_save";
     }
 
     //SAVE POST
+    //http://localhost:8080/employee/form
     @Override
-    public String employeeControllerSavePostForm(EmployeeRestDto employeeRestDto, BindingResult bindingResult) {
-        return null;
+    @PostMapping("employee/form")
+    public String employeeControllerSavePostForm(@Valid @ModelAttribute("employee_save") EmployeeRestDto employeeRestDto, BindingResult bindingResult) {
+        RestTemplate restTemplate = new RestTemplate();
+        String URL = "http://localhost:8080/api/v1/employees";//dikkat sonuna root yazma
+        if(bindingResult.hasErrors()){
+            return "employee_save";
+        }
+        restTemplate.postForObject(URL,employeeRestDto,EmployeeRestDto.class);
+        return "redirect:/employee/list";
     }
 
     //LIST
@@ -93,14 +101,26 @@ public class EmployeeControllerImp implements IEmployeeController {
 
     //UPDATE GET
     @Override
-    public String employeeControllerUpdateGetForm(Long id, Model model) {
-        return null;
+    @GetMapping("update/employee/{id}")
+    public String employeeControllerUpdateGetForm(@PathVariable(name="id") Long id, Model model) {
+        RestTemplate restTemplate = new RestTemplate();
+        String URL = "http://localhost:8080/api/v1/employees/"+id;//dikkat sonuna root yazma
+        ResponseEntity<EmployeeRestDto> responseEntity = restTemplate.exchange(URL, HttpMethod.GET, HttpEntity.EMPTY,EmployeeRestDto.class);
+        model.addAttribute("employee_update",responseEntity.getBody());
+        return "employee_update";
     }
 
 
     //UPDATE POST
     @Override
-    public String employeeControllerUpdatePostForm(EmployeeRestDto employeeRestDto, Long id, BindingResult bindingResult) {
-        return null;
+    @PostMapping("update/employee/{id}")
+    public String employeeControllerUpdatePostForm(@Valid @ModelAttribute("employee_update")  EmployeeRestDto employeeRestDto, @PathVariable(name="id") Long id, BindingResult bindingResult) {
+        RestTemplate restTemplate = new RestTemplate();
+        String URL = "http://localhost:8080/api/v1/employees";//dikkat sonuna root yazma
+        if(bindingResult.hasErrors()){
+            return "employee_update";
+        }
+        restTemplate.postForObject(URL,employeeRestDto,EmployeeRestDto.class);
+        return "redirect:/employee/list";
     }
 }
