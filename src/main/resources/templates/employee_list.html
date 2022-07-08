@@ -1,7 +1,7 @@
 <!doctype html>
 <html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 <!-- title-->
-<title>My page</title>
+<title>Employee List</title>
 <!-- favicon -->
 <link rel="icon" href="images/favicon.jpg"/>
 
@@ -83,6 +83,8 @@
                             th:onclick="if(!(confirm('Silmek istediğinden emin misin ?'))) return false">
                             <i class="fa-regular fa-trash-can text-danger"></i></a></td>
                 </tr>
+
+
                 </tbody>
             </table>
         </div>
@@ -90,23 +92,8 @@
     </div>
 </div>
 
-
-
-<div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
-<div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
-
-<script>
-    let result=function () {
-        swal("Are you sure you want to do this?", {
-            buttons: ["Oh noez!", true],
-        });
-    }
-</script>
-
-
 <!-- Bootstrap JavaScript Libraries -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 </body>
-
 </html>
