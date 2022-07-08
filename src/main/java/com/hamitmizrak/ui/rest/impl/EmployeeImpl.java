@@ -70,7 +70,7 @@ public class EmployeeImpl implements IEmployeeRest {
     //UPDATE
     //http://localhost:8080/api/v1/employees/1
     @Override
-    @PutMapping("/employees/{id}")
+    @PostMapping("/employees/{id}")
     public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable(name="id") Long id, @RequestBody EmployeeDto employeeDto) {
        services.updateEmployee(id,employeeDto);
         return ResponseEntity.ok(employeeDto);
