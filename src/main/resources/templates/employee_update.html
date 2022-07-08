@@ -61,6 +61,7 @@
                     private String employeeName;
                     private String employeeSurname;-->
                     <!-- employeeName -->
+                    <input type="text"   placeholder="employee Name " id="employeeId" th:field="*{employeeId}" />
                     <div class="form-outline mb-4">
                         <input type="text" class="form-control form-control-lg"  placeholder="employee Name " id="employeeName" th:field="*{employeeName}" />
                         <label th:if="${#fields.hasErrors('employeeName')}" th:errors="*{employeeName}"  class="form-label text-danger" >employeeName</label>
