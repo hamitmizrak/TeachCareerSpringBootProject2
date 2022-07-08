@@ -1,0 +1,112 @@
+<!doctype html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+<!-- title-->
+<title>My page</title>
+<!-- favicon -->
+<link rel="icon" href="images/favicon.jpg"/>
+
+<!-- Turkce karakter -->
+<meta charset="utf-8"/>
+
+<!-- responsive design -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- seo -->
+<meta name="keywords" content="html5,css3,js,jquery,bootstrap,react,es5,es6"/>
+<meta name="description" content="one pages, html5,css3,js,jquery,bootstrap,seo"/>
+<meta name="author" content="Hamit Mızrak"/>
+
+<!-- Google Fonts-->
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text&family=Quicksand:wght@300&display=swap"
+      rel="stylesheet">
+
+<!-- Font awesome-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+
+<!-- Bootstrap CSS v5.0.2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+
+<!-- jquery UI -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>swal("My title", "My description", "success");</script>
+
+<!-- External CSS -->
+<!--<link rel="stylesheet"   th:href="@{/css/style.css}">-->
+
+<!-- External JS -->
+<!--<script th:src="@{/js/template.js}"></script>-->
+<style>
+    tr>td {
+        color:white;
+    }
+</style>
+</head>
+
+<body class="bg-dark text-white">
+<!-- start codes -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <h2 class="text-center text-primary mt-5">Employee List</h2>
+            <a th:text="#{add}" href="/employee/form" class="btn btn-primary"></a>
+            <table class="table table-hover table-striped table-responsive table-lg">
+                <thead>
+                <tr>
+                    <th th:text="#{employee_id}"></th>
+                    <th th:text="#{employee_name}"></th>
+                    <th th:text="#{employee_surname}"></th>
+                    <th th:text="#{show}"></th>
+                    <th th:text="#{update}"></th>
+                    <th th:text="#{delete}"></th>
+                </tr>
+                </thead>
+                <tbody>
+                 <tr th:each="employee:${employee_list}">
+                    <td th:text="${employee.employeeId}"></td>
+                    <td th:text="${employee.employeeName}"></td>
+                    <td th:text="${employee.employeeSurname}"></td>
+
+                    <td><a th:href="@{/find/employee/{id}(id=${employee.employeeId})}"><i class="fa-solid fa-binoculars text-warning"></i></a></td>
+                    <td><a th:href="@{/update/employee/{id}(id=${employee.employeeId})}"><i class="fa-solid fa-wrench text-primary"></i></a></td>
+                    <td>
+                        <!-- <a th:onclick="if(!(confirm('Silmek istediğinden emin misin ?'))) return false"-->
+                        <a
+                            th:href="@{/delete/employee/{id}(id=${employee.employeeId})}"
+                            th:onclick="if(!(confirm('Silmek istediğinden emin misin ?'))) return false">
+                            <i class="fa-regular fa-trash-can text-danger"></i></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+
+
+<div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+<div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+
+<script>
+    let result=function () {
+        swal("Are you sure you want to do this?", {
+            buttons: ["Oh noez!", true],
+        });
+    }
+</script>
+
+
+<!-- Bootstrap JavaScript Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
